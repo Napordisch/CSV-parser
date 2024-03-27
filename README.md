@@ -5,4 +5,4 @@ Work in progress. \
 Absolutely no writing capabilities yet :)
 
 ## Usage
-Include CSV-parser.h and compile CSV-parser.cpp with your code
+Include CSVdb.h and compile CSVdb.cpp with your code
