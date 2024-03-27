@@ -23,6 +23,7 @@ private:
   unsigned int rows_ = 0;
   std::vector<std::string *> table_;
   void AddRow();
+  void ClearLastEmptyRow();
 };
 
 #endif

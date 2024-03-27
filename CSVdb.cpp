@@ -26,6 +26,7 @@ void CSVdb::Read() {
     ReadRow(the_file, rows_ - 1);
   }
   the_file.close();
+  ClearLastEmptyRow();
 }
 
 void CSVdb::AddRow() {
@@ -37,7 +38,8 @@ void CSVdb::AddRow() {
 void CSVdb::Display() {
   for (unsigned int i = 0; i < rows_; ++i) {
     for (unsigned int j = 0; j < columns_; ++j) {
-      std::cout << table_[i][j] << ' ';
+      std::cout << "[";
+      std::cout << table_[i][j] << "]" << ' ';
     }
     std::cout << '\n';
   }
@@ -45,4 +47,19 @@ void CSVdb::Display() {
 
 std::string CSVdb::GetItem(unsigned int row, unsigned int column) {
   return table_[row][column];
+}
+
+void CSVdb::ClearLastEmptyRow() {
+  bool empty = true;
+  for (unsigned int i = 0; i < columns_; ++i) {
+    if (table_[rows_ - 1][i] != "") {
+      empty = false;
+      return;
+    }
+  }
+  if (empty) {
+    delete[] table_[rows_ - 1];
+    table_.pop_back();
+    rows_--;
+  }
 }
