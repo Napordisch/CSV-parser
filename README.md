@@ -1,3 +1,3 @@
 # CSV-parser
-Simple parser for CSV databases
+Simple parser for CSV databases.
 Work in progress.
