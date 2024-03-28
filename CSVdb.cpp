@@ -1,4 +1,5 @@
 #include "CSVdb.h"
+#include <fstream>
 #include <iostream>
 
 CSVdb::CSVdb(unsigned int columns, std::string filename) {
@@ -39,7 +40,7 @@ void CSVdb::Display() {
   for (unsigned int i = 0; i < rows_; ++i) {
     for (unsigned int j = 0; j < columns_; ++j) {
       std::cout << "[";
-      std::cout << table_[i][j] << "]" << ' ';
+      std::cout << table_[i][j] << "]" << '\t';
     }
     std::cout << '\n';
   }
