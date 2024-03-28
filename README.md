@@ -1,6 +1,7 @@
 # CSV-parser
 
-Simple parser for CSV databases \
+## Simple parser for CSV tables.
+Stores CSV table in a vector of arrays. \
 Work in progress. \
 Absolutely no writing capabilities yet :)
 
