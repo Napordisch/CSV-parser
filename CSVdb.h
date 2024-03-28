@@ -19,6 +19,7 @@ public:
                       unsigned int column); // 0-based indexing
   void Reset();
   void CreateRow(std::vector<std::string> row_data);
+  void SetFile(std::string new_file);
 
 private:
   std::string filename_;

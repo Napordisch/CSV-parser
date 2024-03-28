@@ -4,7 +4,7 @@
 
 // public:
 CSVdb::CSVdb(unsigned int columns, std::string filename) {
-  filename_ = filename;
+  SetFile(filename);
   columns_ = columns;
   Read();
 }
@@ -34,6 +34,20 @@ void CSVdb::Read() {
   ClearLastEmptyRow();
 }
 
+void CSVdb::Write() {
+  std::fstream the_file(filename_, std::ios::out);
+  the_file.seekp(0);
+  for (unsigned int i = 0; i < rows_; ++i) {
+    for (unsigned int j = 0; j < columns_; ++j) {
+      the_file << table_[i][j];
+      if (j < columns_ - 1) {
+        the_file << ',';
+      }
+    }
+    the_file << '\n';
+  }
+}
+
 void CSVdb::Display() {
   for (unsigned int i = 0; i < rows_; ++i) {
     for (unsigned int j = 0; j < columns_; ++j) {
@@ -58,6 +72,8 @@ void CSVdb::CreateRow(std::vector<std::string> row_data) {
   FillRow(rows_ - 1, row_data);
 }
 
+void CSVdb::SetFile(std::string new_file) { filename_ = new_file; }
+
 // private:
 void CSVdb::AddRow() {
   std::string *new_row = new std::string[columns_];
@@ -68,7 +84,7 @@ void CSVdb::AddRow() {
 void CSVdb::ClearLastEmptyRow() {
   bool empty = true;
   for (unsigned int i = 0; i < columns_; ++i) {
-    if (table_[rows_ - 1][i] != "") {
+    if (table_[rows_ - 1][i] != "" && table_[rows_ - 1][i] != "\n") {
       empty = false;
       return;
     }
@@ -79,6 +95,7 @@ void CSVdb::ClearLastEmptyRow() {
     rows_--;
   }
 }
+
 void CSVdb::FillRow(unsigned int row, std::vector<std::string> row_data) {
   for (unsigned int i = 0; i < columns_; ++i) {
     table_[row][i] = row_data[i];
